@@ -21,7 +21,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-screen items-center justify-center gap-2">
+    <div className="flex flex-col h-screen items-center justify-center gap-4">
       <h1 className="m-2">Encrypt a message</h1>
       <input
         type="text"
@@ -36,14 +36,14 @@ export default function Home() {
       >
         generate
       </button>
-      <div className="mt-8">
-        <h1>Cypher Output:</h1>
+      <div className="mt-8 border border-gray-200 rounded-md p-4">
+        <h1 className="text-gray-700">cypher output:</h1>
         {encryptedMessage && (
           <p>
             generated, copy to clipboard{" "}
             <button
               onClick={handleCopy}
-              className="bg-blue-500 text-gray-100 rounded-md p-1 ml-4 cursor-pointer hover:bg-blue-300"
+              className="bg-blue-500 text-gray-100 rounded-md px-2 py-1 ml-4 cursor-pointer hover:bg-blue-300"
             >
               copy
             </button>
