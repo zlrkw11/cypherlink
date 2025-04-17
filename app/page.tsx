@@ -13,6 +13,13 @@ export default function Home() {
     const encodedMessage = btoa(JSON.stringify(result));
     setEncryptedMessage(encodedMessage);
   };
+
+  const handleCopy = () => {
+    if (!encryptedMessage) return;
+    navigator.clipboard.writeText(encryptedMessage);
+    alert("Copied to clipboard");
+  };
+
   return (
     <div className="flex flex-col h-screen items-center justify-center gap-2">
       <h1 className="m-2">Encrypt a message</h1>
@@ -31,6 +38,17 @@ export default function Home() {
       </button>
       <div className="mt-8">
         <h1>Cypher Output:</h1>
+        {encryptedMessage && (
+          <p>
+            generated, copy to clipboard{" "}
+            <button
+              onClick={handleCopy}
+              className="bg-blue-500 text-gray-100 rounded-md p-1 ml-4 cursor-pointer hover:bg-blue-300"
+            >
+              copy
+            </button>
+          </p>
+        )}
       </div>
     </div>
   );
