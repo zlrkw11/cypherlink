@@ -9,6 +9,7 @@ const Decrypted = () => {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
   const [parsedData, setParsedData] = useState<any>(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const encoded = searchParams.get("data");
@@ -16,6 +17,7 @@ const Decrypted = () => {
     try {
       const decoded = atob(encoded);
       const data = JSON.parse(decoded);
+      console.log("data", data);
       setParsedData(data);
       setStatus("Data parsed successfully. Enter password to decrypt");
     } catch (e) {
@@ -25,7 +27,10 @@ const Decrypted = () => {
 
   const handleDecrypt = async () => {
     if (!parsedData) return;
-    if (!password) return setStatus("Please enter a password");
+    if (!password) {
+      console.log("no password entered");
+      return setStatus("Please enter a password");
+    }
     try {
       const result = await decryptMessage(parsedData, password);
       setDecryptedMessage(result);
@@ -33,6 +38,10 @@ const Decrypted = () => {
     } catch (e) {
       setStatus("Failed to decrypt");
     }
+  };
+
+  const handleShow = () => {
+    setShow(!show);
   };
   return (
     <div className="flex flex-col items-center justify-center gap-4 h-screen">
@@ -44,17 +53,23 @@ const Decrypted = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="rounded-md bg-blue-500 px-4 py-2 text-gray-100 cursor-pointer hover:bg-blue-300">
+      <button
+        onClick={handleDecrypt}
+        className="rounded-md bg-blue-500 px-4 py-2 text-gray-100 cursor-pointer hover:bg-blue-300"
+      >
         Decrypt
       </button>
       <div className="border-2 border-gray-300 p-8 rounded-md gap-2 flex flex-col">
         {" "}
         <h1 className="font-bold text-gray-400">Decrypted Message</h1>
-        {parsedData && (
+        {decryptedMessage && (
           <span className="flex gap-4">
-            <p>************</p>
-            <button className="bg-blue-500 px-2 py-1 hover:bg-blue-300 rounded-md text-gray-100 cursor-pointer">
-              show
+            {show ? <p>{decryptedMessage}</p> : <p>************</p>}
+            <button
+              onClick={handleShow}
+              className="bg-blue-500 px-2 py-1 hover:bg-blue-300 rounded-md text-gray-100 cursor-pointer"
+            >
+              {show ? "Hide" : "Show"}
             </button>
           </span>
         )}

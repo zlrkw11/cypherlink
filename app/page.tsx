@@ -8,7 +8,8 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [link, setLink] = useState("");
-  const password = randomString(8);
+  const [key, setKey] = useState(() => randomString(8));
+  console.log(key);
 
   function randomString(length: number) {
     if (length % 2 !== 0) {
@@ -20,8 +21,8 @@ export default function Home() {
   const handleEncrypt = async () => {
     if (!message) return;
 
-    console.log(password);
-    const result = await encryptMessage(message, password);
+    console.log(key);
+    const result = await encryptMessage(message, key);
     const encodedMessage = btoa(JSON.stringify(result));
     setEncryptedMessage(encodedMessage);
     const url = `${window.location.origin}/decrypt?data=${encodeURIComponent(
@@ -37,8 +38,8 @@ export default function Home() {
   };
 
   const handleCopyKey = () => {
-    if (!password) return;
-    navigator.clipboard.writeText(password);
+    if (!key) return;
+    navigator.clipboard.writeText(key);
     alert("Copied to clipboard");
   };
 
