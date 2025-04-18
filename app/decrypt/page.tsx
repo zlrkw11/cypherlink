@@ -1,7 +1,16 @@
 "use client";
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { decryptMessage } from "../utils/crypto";
+
+export default function DecryptPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Decrypted />
+    </Suspense>
+  );
+}
 
 const Decrypted = () => {
   const searchParams = useSearchParams();
@@ -77,5 +86,3 @@ const Decrypted = () => {
     </div>
   );
 };
-
-export default Decrypted;
