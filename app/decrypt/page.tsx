@@ -26,7 +26,6 @@ const Decrypted = () => {
     try {
       const decoded = atob(encoded);
       const data = JSON.parse(decoded);
-      console.log("data", data);
       setParsedData(data);
       setStatus("Data parsed successfully. Enter password to decrypt");
     } catch (e) {

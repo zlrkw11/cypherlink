@@ -9,7 +9,6 @@ export default function Home() {
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [link, setLink] = useState("");
   const [key, setKey] = useState(() => randomString(8));
-  console.log(key);
 
   function randomString(length: number) {
     if (length % 2 !== 0) {
@@ -20,8 +19,6 @@ export default function Home() {
 
   const handleEncrypt = async () => {
     if (!message) return;
-
-    console.log(key);
     const result = await encryptMessage(message, key);
     const encodedMessage = btoa(JSON.stringify(result));
     setEncryptedMessage(encodedMessage);
