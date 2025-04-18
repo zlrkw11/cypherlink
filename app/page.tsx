@@ -8,6 +8,7 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [encryptedMessage, setEncryptedMessage] = useState("");
   const [link, setLink] = useState("");
+  const password = randomString(8);
 
   function randomString(length: number) {
     if (length % 2 !== 0) {
@@ -18,7 +19,7 @@ export default function Home() {
 
   const handleEncrypt = async () => {
     if (!message) return;
-    const password = randomString(8);
+
     console.log(password);
     const result = await encryptMessage(message, password);
     const encodedMessage = btoa(JSON.stringify(result));
@@ -32,6 +33,12 @@ export default function Home() {
   const handleCopy = () => {
     if (!encryptedMessage) return;
     navigator.clipboard.writeText(link);
+    alert("Copied to clipboard");
+  };
+
+  const handleCopyKey = () => {
+    if (!password) return;
+    navigator.clipboard.writeText(password);
     alert("Copied to clipboard");
   };
 
@@ -53,10 +60,23 @@ export default function Home() {
       >
         generate
       </button>
-      <div className="mt-8 border border-gray-200 rounded-md p-4">
-        <h1 className="text-gray-700">cypher output:</h1>
+      <div className="mt-8 border border-gray-200 rounded-md p-10 flex flex-col gap-4">
+        {encryptedMessage ? (
+          <h1 className="text-gray-700">Encrypted Message</h1>
+        ) : (
+          <h1 className="text-gray-700">Waiting For Input...</h1>
+        )}
+
         {encryptedMessage && (
           <div className="flex flex-col gap-2">
+            {" "}
+            <h1 className="text-gray-700">your one-time key</h1>
+            <button
+              onClick={handleCopyKey}
+              className="bg-blue-500 text-gray-100 rounded-md px-2 py-1 cursor-pointer hover:bg-blue-300"
+            >
+              copy
+            </button>
             <Link href={link}>
               <p className="text-blue-400 underline hover:text-blue-200">
                 link to decrypted message
