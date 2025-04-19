@@ -1,5 +1,6 @@
 "use client";
 import { Suspense } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { decryptMessage } from "../utils/crypto";
@@ -70,8 +71,8 @@ const Decrypted = () => {
       <div className="border-2 border-gray-300 p-8 rounded-md gap-2 flex flex-col">
         {" "}
         <h1 className="font-bold text-gray-400">Decrypted Message</h1>
-        {decryptedMessage && (
-          <span className="flex gap-4">
+        {decryptedMessage ? (
+          <span className="flex gap-4 border rounded-md border-gray-300 p-4">
             {show ? <p>{decryptedMessage}</p> : <p>************</p>}
             <button
               onClick={handleShow}
@@ -80,7 +81,16 @@ const Decrypted = () => {
               {show ? "Hide" : "Show"}
             </button>
           </span>
+        ) : (
+          <div className="border rounded-md border-gray-300 p-4 bg-gray-100"></div>
         )}
+        <div className="mt-12 text-sm">
+          <Link href="/">
+            <h1 className="underline underline-offset-2 text-blue-500">
+              Back to encryption page
+            </h1>
+          </Link>
+        </div>
       </div>
     </div>
   );
