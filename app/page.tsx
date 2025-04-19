@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { encryptMessage } from "./utils/crypto";
 import { randomBytes } from "crypto";
+import { Button } from "@headlessui/react";
 import Link from "next/link";
 
 export default function Home() {
@@ -52,40 +53,40 @@ export default function Home() {
         onChange={(e) => setMessage(e.target.value)}
         className="border border-gray-800 rounded-md p-2"
       />
-      <button
+      <Button
         onClick={handleEncrypt}
-        className="bg-blue-500 text-gray-100 rounded-md p-2 hover:bg-blue-300 cursor-pointer"
+        className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
       >
-        generate
-      </button>
+        Generate
+      </Button>
       <div className="mt-8 border border-gray-200 rounded-md p-10 flex flex-col gap-4">
         {encryptedMessage ? (
-          <h1 className="text-gray-700">Encrypted Message</h1>
+          <h1 className="text-gray-500 font-semibold">Message Encrypted</h1>
         ) : (
-          <h1 className="text-gray-700">Waiting For Input...</h1>
+          <h1 className="text-gray-500">waiting for input...</h1>
         )}
 
         {encryptedMessage && (
           <div className="flex flex-col gap-2">
             {" "}
             <h1 className="text-gray-700">your one-time key</h1>
-            <button
+            <Button
               onClick={handleCopyKey}
-              className="bg-blue-500 text-gray-100 rounded-md px-2 py-1 cursor-pointer hover:bg-blue-300"
+              className="w-[100px] flex justify-center cursor-pointer items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
             >
-              copy
-            </button>
+              Copy Key
+            </Button>
             <Link href={link}>
-              <p className="text-blue-400 underline hover:text-blue-200">
+              <p className="text-gray-500 underline hover:text-gray-400">
                 link to decrypted message
               </p>
             </Link>
-            <button
+            <Button
               onClick={handleCopy}
-              className="bg-blue-500 text-gray-100 rounded-md px-2 py-1 cursor-pointer hover:bg-blue-300"
+              className="cursor-pointer w-[100px] flex justify-center items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
             >
-              copy
-            </button>
+              Copy Link
+            </Button>
           </div>
         )}
       </div>
