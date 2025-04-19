@@ -1,6 +1,7 @@
 "use client";
 import { Suspense } from "react";
 import Link from "next/link";
+import { Button, Switch } from "@headlessui/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { decryptMessage } from "../utils/crypto";
@@ -62,31 +63,36 @@ const Decrypted = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button
+      <Button
         onClick={handleDecrypt}
-        className="rounded-md bg-blue-500 px-4 py-2 text-gray-100 cursor-pointer hover:bg-blue-300"
+        className="inline-flex cursor-pointer items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
       >
         Decrypt
-      </button>
+      </Button>
       <div className="border-2 border-gray-300 p-8 rounded-md gap-2 flex flex-col">
         {" "}
         <h1 className="font-bold text-gray-400">Decrypted Message</h1>
         {decryptedMessage ? (
-          <span className="flex gap-4 border rounded-md border-gray-300 p-4">
+          <div className="flex flex-col gap-4 border rounded-md border-gray-300 p-4">
             {show ? <p>{decryptedMessage}</p> : <p>************</p>}
-            <button
-              onClick={handleShow}
-              className="bg-blue-500 px-2 py-1 hover:bg-blue-300 rounded-md text-gray-100 cursor-pointer"
+
+            <Switch
+              checked={show}
+              onChange={handleShow}
+              className="group relative flex h-7 w-14 cursor-pointer rounded-full bg-gray-400 p-1 transition-colors duration-200 ease-in-out focus:outline-none data-[focus]:outline-1 data-[focus]:outline-white data-[checked]:bg-gray-500"
             >
-              {show ? "Hide" : "Show"}
-            </button>
-          </span>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none inline-block size-5 translate-x-0 rounded-full bg-white ring-0 shadow-lg transition duration-200 ease-in-out group-data-[checked]:translate-x-7"
+              />
+            </Switch>
+          </div>
         ) : (
           <div className="border rounded-md border-gray-300 p-4 bg-gray-100"></div>
         )}
         <div className="mt-12 text-sm">
           <Link href="/">
-            <h1 className="underline underline-offset-2 text-blue-500">
+            <h1 className="underline underline-offset-2 text-gray-500 hover:text-gray-400">
               Back to encryption page
             </h1>
           </Link>

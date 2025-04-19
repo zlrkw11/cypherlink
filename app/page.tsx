@@ -72,7 +72,7 @@ export default function Home() {
             <h1 className="text-gray-700">your one-time key</h1>
             <Button
               onClick={handleCopyKey}
-              className="w-[100px] flex justify-center cursor-pointer items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
+              className="w-[100px] flex justify-center cursor-pointer items-center gap-2 rounded-md bg-gray-700 py-1 px-2 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
             >
               Copy Key
             </Button>
@@ -83,7 +83,7 @@ export default function Home() {
             </Link>
             <Button
               onClick={handleCopy}
-              className="cursor-pointer w-[100px] flex justify-center items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
+              className="cursor-pointer w-[100px] flex justify-center items-center gap-2 rounded-md bg-gray-700 py-1 px-2 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-gray-200"
             >
               Copy Link
             </Button>
