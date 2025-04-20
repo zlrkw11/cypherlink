@@ -69,7 +69,7 @@ const Decrypted = () => {
       >
         Decrypt
       </Button>
-      <div className="border-2 border-gray-300 p-8 rounded-md gap-2 flex flex-col">
+      <div className="border-2 border-gray-300 p-8 rounded-md gap-2 flex flex-col max-w-[500px]">
         {" "}
         <h1 className="font-bold text-gray-400">Decrypted Message</h1>
         {decryptedMessage ? (
