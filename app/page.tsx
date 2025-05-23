@@ -4,6 +4,8 @@ import { encryptMessage } from "./utils/crypto";
 import { randomBytes } from "crypto";
 import { Button } from "@headlessui/react";
 import Link from "next/link";
+import { Terminal } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function Home() {
   const [message, setMessage] = useState("");
@@ -45,7 +47,7 @@ export default function Home() {
     <div className="flex flex-col h-screen items-center justify-center gap-4">
       <h1 className="m-2 text-xl text-gray-500 font-semibold border-b-2 border-gray-200">
         Encrypt a message
-      </h1>
+      </h1>{" "}
       <input
         type="text"
         placeholder="Enter a message..."
@@ -59,11 +61,18 @@ export default function Home() {
       >
         Generate
       </Button>
-      <div className="mt-8 border border-gray-200 rounded-md p-10 flex flex-col gap-4">
+      <div className=" p-10 flex flex-col gap-4">
         {encryptedMessage ? (
           <h1 className="text-gray-500 font-semibold">Message Encrypted</h1>
         ) : (
-          <h1 className="text-gray-500">waiting for input...</h1>
+          <Alert>
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>Waiting For Input</AlertTitle>
+            <AlertDescription>
+              Copy the message and key to decrypt it later. The Message will
+              show up on a randomly generated link.
+            </AlertDescription>
+          </Alert>
         )}
 
         {encryptedMessage && (
